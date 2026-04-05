@@ -31,10 +31,9 @@ Authentication:
 As we follow a multi tenet architecture, the signup method generates a unique organizationid to map the user to a dashboard workspace. User gains access to a personal dashboard
 and can join other workspaces through an invite. A unique username is necessary to keep seperate authentication records.
 A random "salt" is generated and combined with the password. This ensures that even if two users have the same password, their stored hashes will be completely different.
-Once a user is authenticated, authentication transition to a stateless session model using JWT. 
+Once a user is authenticated, authentication transitions to a stateless session model using JWT. 
 This allows the user to access their dashboard without re-entering their password for every request.
-By using an Embedded Membership Array within your User model. This is MongoDB pattern avoids expensive JOIN operations.
-Implemented token
+Used an Embedded Membership Array within the User model, this MongoDB pattern avoids expensive JOIN operations.
 
 Record Management:
 
@@ -62,7 +61,7 @@ User Management:
 
 
 User management allows Workspace Owners to invite new members, and adjust permissions for existing users.
-Roles are scoped specifically to an organizationId. A user may be an Admin in their personal workspace but only a Viewer in a workspace they were invited to join.
+Roles are scoped specifically to an organizationId. A user may be an Admin in their personal workspace but only a Viewer in a workspace they were added in
 The system verifies the requester has Admin or Owner permissions for the current organizationId and pushes the organizationId and assigned role into the target user's memberships array.
 Promotion allows a workspace Owner or Admin to grant higher-level permissions to an existing member.
 This is an immediate change that takes effect the next time the target user performs an action or refreshes their dashboard.
@@ -75,6 +74,7 @@ All financial calculations are performed at the database level using MongoDB Agg
 
 The backend manages bad inputs, and error conditions gracefully, with the help of rate limiting server manages to fend off attacks on expensive operations.
 It also acts as a defensive shield, ensuring that one "noisy neighbor" (a user making thousands of requests) doesn't crash the server for everyone else.
+Structured the project for maintainability and ease of understanding, using routers and controllers
 
 a test environment for apis:
 https://www.postman.com/aviation-pilot-59172093/workspace/dashboard-backend/collection/38385318-2b1a5346-dbb3-4f61-95db-60eeea01c1f6?action=share&creator=38385318
