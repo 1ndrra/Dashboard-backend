@@ -81,9 +81,9 @@ https://www.postman.com/aviation-pilot-59172093/workspace/dashboard-backend/coll
 
 future improvements
 -
-- implementing a redis cache to decrease load on the server.
+- implementing a redis cache to decrease load on the server
 - Enhanced data integrity and export
-- Real time updates.
+- Real time updates
 
 
 
