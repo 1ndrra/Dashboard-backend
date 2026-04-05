@@ -13,12 +13,12 @@ It validates that the authenticated user actually has membership permissions for
 
 Layered Security & Rate Limiting
 implement a two-tier defense strategy against automated threats:
-Standard API Limiter: Managed via express-rate-limit to prevent general infrastructure abuse.
-Strict Mutation Limiter: A high-sensitivity limiter applied to POST, PUT, and DELETE routes to mitigate brute-force transaction injection and account takeover attempts.
+- Standard API Limiter: Managed via express-rate-limit to prevent general infrastructure abuse.
+- Strict Mutation Limiter: A high-sensitivity limiter applied to POST, PUT, and DELETE routes to mitigate brute-force transaction injection and account takeover attempts.
 
 Database Integrity
-Atomic Signup Flow: utilized a coordinated creation pattern where a User, their Organization, and their Admin permissions are created in a single lifecycle to prevent "ghost" data.
-Soft Deletion: Transactions are never permanently purged on the first call; an isDeleted flag allows for audit trails and accidental data recovery.
+- Atomic Signup Flow: utilized a coordinated creation pattern where a User, their Organization, and their Admin permissions are created in a single lifecycle to prevent "ghost" data.
+- Soft Deletion: Transactions are never permanently purged on the first call; an isDeleted flag allows for audit trails and accidental data recovery.
 
 API endpoints:
 -
@@ -51,7 +51,7 @@ Primary Key: organizationId + transactionDate
 When updating financial records in a multi-tenant environment, the URL parameters serve as the primary "pointer" to the specific document,
 while the request body contains the new data.
 To avoid the common floating-point errors in JavaScript (e.g., 0.1+0.2 != 0.3), this records utilize Decimal128 via MongoDB virtuals.
-Security Logic: When a record is created, the backend ignores any organizationId passed in the body.
+- Security Logic: When a record is created, the backend ignores any organizationId passed in the body.
 Instead, it pulls the organizationId from the verified request header. This prevents a user from "injecting" a record into a workspace they don't own.
 
 User Management:
