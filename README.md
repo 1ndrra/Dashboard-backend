@@ -3,6 +3,7 @@ This system is engineered using a Multi-Tenant Architecture, enabling seamless d
 Used mongoDB for data persistence, Express.js for http server, and node.js as the run-time.
 
 What is Multi-Tenancy?
+-
 
 In modern software engineering, Multi-Tenancy is an architecture where a single instance of a software application serves multiple customers. 
 In a financial context, a user in "Organization A" must never be able to see or interact with the sensitive financial data of "Organization B."
@@ -20,11 +21,12 @@ Atomic Signup Flow: utilized a coordinated creation pattern where a User, their 
 Soft Deletion: Transactions are never permanently purged on the first call; an isDeleted flag allows for audit trails and accidental data recovery.
 
 API endpoints:
+-
 Authentication:
 -Signup: /api/auth/signup
 -Login:  /api/auth/signin
 -Logut:  /api/auth/logout
--
+
 
 As we follow a multi tenet architecture, the signup method generates a unique organizationid to map the user to a dashboard workspace. User gains access to a personal dashboard
 and can join other workspaces through an invite. A unique username is necessary to keep seperate authentication records.
@@ -40,7 +42,7 @@ Record Management:
 -Update record: /api/record/update/:id
 -Soft Delete: /api/record/delete/:id
 -Restore: /api/record/restore/:id
--
+
 
 All financial records are strictly partitioned by organizationId.
 This ensures that even though all transactions live in the same MongoDB collection, data leakage between workspaces is architecturally impossible.
@@ -54,7 +56,7 @@ Instead, it pulls the organizationId from the verified request header. This prev
 User Management:
 -Add user: /api/usermanagement/add-member
 -Promote user: /api/usermanagement/promote
--
+
 
 User management allows Workspace Owners to invite new members, and adjust permissions for existing users.
 Roles are scoped specifically to an organizationId. A user may be an Admin in their personal workspace but only a Viewer in a workspace they were invited to join.
@@ -63,7 +65,7 @@ Promotion allows a workspace Owner or Admin to grant higher-level permissions to
 This is an immediate change that takes effect the next time the target user performs an action or refreshes their dashboard.
 
 Summary api for dashboard: /api/user/summary
--
+
 Fetches a comprehensive financial overview for the active workspace, including total balances, category spending, and monthly trends.
 The API uses the activeOrgId from the authenticated user's session, Only records where isDeleted: false are included.
 All financial calculations are performed at the database level using MongoDB Aggregation Pipelines to ensure accuracy and speed.
@@ -74,11 +76,12 @@ It also acts as a defensive shield, ensuring that one "noisy neighbor" (a user m
 a test environment for apis:
 https://www.postman.com/aviation-pilot-59172093/workspace/dashboard-backend/collection/38385318-2b1a5346-dbb3-4f61-95db-60eeea01c1f6?action=share&creator=38385318
 
-future improvements:
+future improvements
+-
 -implementing a redis cache to decrease load on the server.
 -Enhanced data integrity and export
 -Real time updates.
--
+
 
 
 
