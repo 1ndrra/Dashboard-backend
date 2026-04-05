@@ -50,6 +50,7 @@ This ensures that even though all transactions live in the same MongoDB collecti
 Primary Key: organizationId + transactionDate
 When updating financial records in a multi-tenant environment, the URL parameters serve as the primary "pointer" to the specific document,
 while the request body contains the new data.
+Fetch records come paginated so that the historic data no matter how long feel snappy.
 To avoid the common floating-point errors in JavaScript (e.g., 0.1+0.2 != 0.3), this records utilize Decimal128 via MongoDB virtuals.
 - Security Logic: When a record is created, the backend ignores any organizationId passed in the body.
 Instead, it pulls the organizationId from the verified request header. This prevents a user from "injecting" a record into a workspace they don't own.
