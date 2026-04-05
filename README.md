@@ -24,9 +24,9 @@ API endpoints:
 -
 Authentication:
 
-- Signup: /api/auth/signup
-- Login:  /api/auth/signin
-- Logut:  /api/auth/logout
+- Signup:  /api/auth/signup
+- Login:   /api/auth/signin
+- Logut:   /api/auth/logout
 
 As we follow a multi tenet architecture, the signup method generates a unique organizationid to map the user to a dashboard workspace. User gains access to a personal dashboard
 and can join other workspaces through an invite. A unique username is necessary to keep seperate authentication records.
@@ -38,11 +38,11 @@ Implemented token
 
 Record Management:
 
-- Create: /api/record/create
-- Search record: /api/record/fetch
-- Update record: /api/record/update/:id
+- Create:  /api/record/create
+- Search record:  /api/record/fetch
+- Update record:  /api/record/update/:id
 - Soft Delete: /api/record/delete/:id
-- Restore: /api/record/restore/:id
+- Restore:  /api/record/restore/:id
 
 
 All financial records are strictly partitioned by organizationId.
@@ -56,8 +56,8 @@ Instead, it pulls the organizationId from the verified request header. This prev
 
 User Management:
 
-- Add user: /api/usermanagement/add-member
-- Promote user: /api/usermanagement/promote
+- Add user:  /api/usermanagement/add-member
+- Promote user:  /api/usermanagement/promote
 
 
 User management allows Workspace Owners to invite new members, and adjust permissions for existing users.
@@ -66,7 +66,7 @@ The system verifies the requester has Admin or Owner permissions for the current
 Promotion allows a workspace Owner or Admin to grant higher-level permissions to an existing member.
 This is an immediate change that takes effect the next time the target user performs an action or refreshes their dashboard.
 
-- Summary api for dashboard: /api/user/summary
+- Summary api for dashboard:  /api/user/summary
 
 Fetches a comprehensive financial overview for the active workspace, including total balances, category spending, and monthly trends.
 The API uses the activeOrgId from the authenticated user's session, Only records where isDeleted: false are included.
