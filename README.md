@@ -23,10 +23,10 @@ Soft Deletion: Transactions are never permanently purged on the first call; an i
 API endpoints:
 -
 Authentication:
--Signup: /api/auth/signup
--Login:  /api/auth/signin
--Logut:  /api/auth/logout
 
+- Signup: /api/auth/signup
+- Login:  /api/auth/signin
+- Logut:  /api/auth/logout
 
 As we follow a multi tenet architecture, the signup method generates a unique organizationid to map the user to a dashboard workspace. User gains access to a personal dashboard
 and can join other workspaces through an invite. A unique username is necessary to keep seperate authentication records.
@@ -37,11 +37,12 @@ By using an Embedded Membership Array within your User model. This is MongoDB pa
 Implemented token
 
 Record Management:
--Create: /api/record/create
--Search record: /api/record/fetch
--Update record: /api/record/update/:id
--Soft Delete: /api/record/delete/:id
--Restore: /api/record/restore/:id
+
+- Create: /api/record/create
+- Search record: /api/record/fetch
+- Update record: /api/record/update/:id
+- Soft Delete: /api/record/delete/:id
+- Restore: /api/record/restore/:id
 
 
 All financial records are strictly partitioned by organizationId.
@@ -54,8 +55,9 @@ Security Logic: When a record is created, the backend ignores any organizationId
 Instead, it pulls the organizationId from the verified request header. This prevents a user from "injecting" a record into a workspace they don't own.
 
 User Management:
--Add user: /api/usermanagement/add-member
--Promote user: /api/usermanagement/promote
+
+- Add user: /api/usermanagement/add-member
+- Promote user: /api/usermanagement/promote
 
 
 User management allows Workspace Owners to invite new members, and adjust permissions for existing users.
