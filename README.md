@@ -66,7 +66,7 @@ The system verifies the requester has Admin or Owner permissions for the current
 Promotion allows a workspace Owner or Admin to grant higher-level permissions to an existing member.
 This is an immediate change that takes effect the next time the target user performs an action or refreshes their dashboard.
 
-Summary api for dashboard: /api/user/summary
+- Summary api for dashboard: /api/user/summary
 
 Fetches a comprehensive financial overview for the active workspace, including total balances, category spending, and monthly trends.
 The API uses the activeOrgId from the authenticated user's session, Only records where isDeleted: false are included.
